@@ -35,10 +35,14 @@ describe('tree', () => {
     expect(tree.get(1)?.data).toBe('foo');
   });
 
-  it('adds 2 elements to the tree', () => {
-    tree.add({ key: 1, data: 'foo' });
-    tree.add({ key: 2, data: 'baz' });
-    expect(tree.get(2)?.data).toBe('baz');
+  it('keeps the order when adding elements to the tree', () => {
+    tree.add({ key: 2, data: 'foo' });
+    tree.add({ key: 1, data: 'bar' });
+    tree.add({ key: 3, data: 'baz' });
+
+    expect(tree.get(1)?.data).toBe('bar');
+    expect(tree.get(2)?.data).toBe('foo');
+    expect(tree.get(3)?.data).toBe('baz');
   });
 
   it('throws error when adding an existing key to the tree', () => {
@@ -56,5 +60,35 @@ describe('tree', () => {
     tree.add({ key: 1, data: 'foo' });
     tree.add({ key: 2, data: 'baz' });
     expect(tree.contains(3)).toBe(false);
+  });
+
+  it('preorder, inorder, postorder: returns null for empty tree', () => {
+    expect(tree.preOrder()).toBeNull();
+    expect(tree.inOrder()).toBeNull();
+    expect(tree.preOrder()).toBeNull();
+  });
+
+  it('preorder: returns the list of elements in preorder', () => {
+    tree.add({ key: 2, data: 'foo' });
+    tree.add({ key: 1, data: 'bar' });
+    tree.add({ key: 3, data: 'baz' });
+
+    expect(tree.preOrder()).toEqual(['foo', 'bar', 'baz']);
+  });
+
+  it('inorder: returns the list of elements in inorder', () => {
+    tree.add({ key: 2, data: 'foo' });
+    tree.add({ key: 1, data: 'bar' });
+    tree.add({ key: 3, data: 'baz' });
+
+    expect(tree.inOrder()).toEqual(['bar', 'foo', 'baz']);
+  });
+
+  it('postorder: returns the list of elements in postorder', () => {
+    tree.add({ key: 2, data: 'foo' });
+    tree.add({ key: 1, data: 'bar' });
+    tree.add({ key: 3, data: 'baz' });
+
+    expect(tree.postOrder()).toEqual(['bar', 'baz', 'foo']);
   });
 });
