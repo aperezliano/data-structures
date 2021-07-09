@@ -6,19 +6,19 @@ describe('node', () => {
 
   it('creates a node with data', () => {
     expect(node).not.toBeNull();
-    expect(node.value.data).toBe('foo');
+    expect(node.getValue().data).toBe('foo');
   });
 
   it('adds a left child', () => {
     node.setLeftChild(new Node({ key: 2, data: 'left' }));
     const leftChild = node.getLeftChild() as Node;
-    expect(leftChild.value.data).toBe('left');
+    expect(leftChild.getValue().data).toBe('left');
   });
 
   it('adds a right child', () => {
     node.setLeftChild(new Node({ key: 2, data: 'right' }));
     const leftChild = node.getLeftChild() as Node;
-    expect(leftChild.value.data).toBe('right');
+    expect(leftChild.getValue().data).toBe('right');
   });
 });
 
@@ -53,7 +53,7 @@ describe('tree', () => {
   it('finds an existing element', () => {
     tree.add({ key: 1, data: 'foo' });
     tree.add({ key: 2, data: 'baz' });
-    expect(tree.contains(1)).toBe(true);
+    expect(tree.contains(2)).toBe(true);
   });
 
   it('does not find a non existing element', () => {
@@ -90,5 +90,29 @@ describe('tree', () => {
     tree.add({ key: 3, data: 'baz' });
 
     expect(tree.postOrder()).toEqual(['bar', 'baz', 'foo']);
+  });
+
+  it('deletes a node without children', () => {
+    tree.add({ key: 2, data: 'foo' });
+    tree.delete(2);
+    expect(tree.contains(1)).toBe(false);
+  });
+
+  it('deletes a node with 1 child', () => {
+    tree.add({ key: 1, data: 'foo' });
+    tree.add({ key: 2, data: 'bar' });
+    tree.delete(1);
+    expect(tree.contains(1)).toBe(false);
+    expect(tree.contains(2)).toBe(true);
+  });
+
+  it('deletes a node with 2 children', () => {
+    tree.add({ key: 2, data: 'bar' });
+    tree.add({ key: 1, data: 'foo' });
+    tree.add({ key: 3, data: 'baz' });
+    tree.delete(2);
+    expect(tree.contains(2)).toBe(false);
+    expect(tree.contains(1)).toBe(true);
+    expect(tree.contains(3)).toBe(true);
   });
 });
