@@ -1,1 +1,3 @@
-# ts-playground
+# Data structures
+
+Repository with data structures
