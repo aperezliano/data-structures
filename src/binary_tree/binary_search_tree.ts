@@ -1,7 +1,7 @@
 class BinaryTree {
   private root: Node | null;
 
-  addNode(data: NodeData) {
+  add(data: NodeData) {
     const node = new Node(data);
     if (this.root == null) {
       this.root = node;
@@ -31,11 +31,10 @@ class BinaryTree {
     }
   }
 
-  getNode(key: number) {
+  get(key: number) {
     let currentNode = this.root;
 
     while (currentNode) {
-      if (currentNode == null) return null;
       if (currentNode.value.key === key) return currentNode.value;
 
       if (currentNode.value.key < key) {
@@ -45,6 +44,21 @@ class BinaryTree {
       }
     }
     return null;
+  }
+
+  contains(key: number) {
+    let currentNode = this.root;
+
+    while (currentNode) {
+      if (currentNode.value.key === key) return true;
+
+      if (currentNode.value.key < key) {
+        currentNode = currentNode.getLeftChild();
+      } else {
+        currentNode = currentNode.getRightChild();
+      }
+    }
+    return false;
   }
 }
 
