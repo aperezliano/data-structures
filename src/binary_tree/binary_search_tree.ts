@@ -117,6 +117,35 @@ class BinaryTree {
     elements.push(node.value.data);
     return elements;
   }
+
+  delete(key: number) {
+    /**
+     * 3 Cases:
+     * 1. Leaf Node
+     * 2. Node with just 1 child
+     * 3. Node with both children
+     */
+
+    this.deleteRec(key, this.root);
+  }
+
+  private deleteRec(key: number, node: Node | null): Node | null {
+    if (node === null) return null;
+    if (node?.value.key < key) {
+      node.setLeftChild(this.deleteRec(key, node.getLeftChild()));
+    } else if (node?.value.key > key) {
+      node.setRightChild(this.deleteRec(key, node.getRightChild()));
+    } else {
+      if (node.getRightChild() && node.getLeftChild()) {
+        // Node with 2 children
+        // TODO
+      } else {
+        // Node with 1 or 0 children
+        node = node.getLeftChild() || node.getRightChild();
+      }
+    }
+    return node;
+  }
 }
 
 class Node {
@@ -128,7 +157,7 @@ class Node {
     this.value = data;
   }
 
-  setRightChild(node: Node) {
+  setRightChild(node: Node | null) {
     this.right = node;
   }
 
@@ -136,7 +165,7 @@ class Node {
     return this.right;
   }
 
-  setLeftChild(node: Node) {
+  setLeftChild(node: Node | null) {
     this.left = node;
   }
 
