@@ -1,6 +1,6 @@
 class HashTableOpenAddressing {
   private size: number;
-  private buckets: Array<any>;
+  private buckets: Array<Entry>;
 
   constructor(size = 10) {
     this.buckets = [];
