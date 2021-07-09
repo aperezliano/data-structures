@@ -18,7 +18,7 @@ class HashTableChaining {
     // Element already present
     const chain = this.buckets[hashKey];
     if (chain.hasOwnProperty(key)) {
-      throw "Element already present";
+      throw 'Element already present';
     }
 
     chain[key] = value;
@@ -40,7 +40,7 @@ class HashTableChaining {
   }
 
   private computeHash(key: string | number) {
-    if (typeof key === "number") {
+    if (typeof key === 'number') {
       key = `${key}`;
     }
 

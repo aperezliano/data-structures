@@ -19,7 +19,7 @@ class HashTableOpenAddressing {
 
     // Element present
     if (this.buckets[hashKey].hasOwnProperty(key)) {
-      throw "Element already present";
+      throw 'Element already present';
     }
 
     // Element not present but the slot is taken (Linear probing)
@@ -60,7 +60,7 @@ class HashTableOpenAddressing {
   }
 
   private computeHash(key: string | number) {
-    if (typeof key === "number") {
+    if (typeof key === 'number') {
       key = `${key}`;
     }
     let total = 0;
