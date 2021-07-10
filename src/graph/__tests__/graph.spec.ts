@@ -35,3 +35,23 @@ it('does not any a vertex if the source does not exist', () => {
   expect(graph.getEdges(1)).toEqual([]);
   expect(graph.getEdges(2)).toEqual([]);
 });
+
+it('traverses the tree in dfs', () => {
+  graph.addNode(0);
+  graph.addNode(1);
+  graph.addNode(2);
+  graph.addNode(3);
+  graph.addEdges(0, [3, 2, 1]);
+  graph.addEdges(1, [3]);
+  expect(graph.dfs(0)).toEqual([0, 1, 3, 2]);
+});
+
+it('traverses the tree in bfs', () => {
+  graph.addNode(0);
+  graph.addNode(1);
+  graph.addNode(2);
+  graph.addNode(3);
+  graph.addEdges(0, [1, 2]);
+  graph.addEdges(1, [3]);
+  expect(graph.bfs(0)).toEqual([0, 1, 2, 3]);
+});
