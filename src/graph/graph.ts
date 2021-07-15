@@ -1,4 +1,4 @@
-// Simple graph with an adjadcency list
+// Simple undirected graph with an adjadcency list
 class Graph {
   private nodes: Map<number, number[]> = new Map();
 
