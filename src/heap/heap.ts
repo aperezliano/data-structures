@@ -20,21 +20,50 @@ class Heap {
     let index = this.data.length;
     this.data.push(num);
     while (this.compFunc(this.data[index], this.data[this.parent(index)])) {
-      [this.data[index], this.data[this.parent(index)]] = [
-        this.data[this.parent(index)],
-        this.data[index],
-      ];
+      this.swap(index, this.parent(index));
       index = this.parent(index);
     }
     return this;
   }
 
   getTop(): number | null {
-    return null;
+    let root = this.data[0];
+    if (this.data.length > 0) {
+      this.data[0] = this.data.pop() as number;
+    }
+    this.heapify(0);
+
+    return root;
   }
 
   getData(): number[] {
     return [...this.data];
+  }
+
+  private heapify(index: number) {
+    let leftChild = this.leftChild(index);
+    let rightChild = this.rightChild(index);
+    let smallest = index;
+    if (
+      this.data[leftChild] &&
+      this.compFunc(this.data[leftChild], this.data[index])
+    ) {
+      smallest = leftChild;
+    }
+    if (
+      this.data[rightChild] &&
+      this.compFunc(this.data[rightChild], this.data[smallest])
+    ) {
+      smallest = rightChild;
+    }
+    if (index !== smallest) {
+      this.swap(index, smallest);
+      this.heapify(smallest);
+    }
+  }
+
+  private swap(i1: number, i2: number) {
+    [this.data[i1], this.data[i2]] = [this.data[i2], this.data[i1]];
   }
 
   private biggerThan(a: number, b: number): boolean {

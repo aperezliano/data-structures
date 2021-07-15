@@ -25,6 +25,14 @@ describe('Min Heap', () => {
     heap.add(4).add(5).add(6).add(3);
     expect(heap.getData()).toEqual([3, 4, 6, 5]);
   });
+
+  it('gets the min element each time', () => {
+    heap.add(4).add(5).add(6).add(3);
+    expect(heap.getTop()).toBe(3);
+    expect(heap.getTop()).toBe(4);
+    expect(heap.getTop()).toBe(5);
+    expect(heap.getTop()).toBe(6);
+  });
 });
 
 describe('Max Heap', () => {
@@ -46,8 +54,16 @@ describe('Max Heap', () => {
     expect(heap.getData()).toEqual([3, 2, 1]);
   });
 
-  it('adds non increasing elements to a max Heap', () => {
+  it('adds non decreasing elements to a max Heap', () => {
     heap.add(4).add(5).add(6).add(3);
     expect(heap.getData()).toEqual([6, 5, 4, 3]);
+  });
+
+  it('gets the max element each time', () => {
+    heap.add(4).add(5).add(6).add(3);
+    expect(heap.getTop()).toBe(6);
+    expect(heap.getTop()).toBe(5);
+    expect(heap.getTop()).toBe(4);
+    expect(heap.getTop()).toBe(3);
   });
 });
