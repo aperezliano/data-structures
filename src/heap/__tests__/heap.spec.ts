@@ -56,7 +56,7 @@ describe('Max Heap', () => {
 
   it('adds non decreasing elements to a max Heap', () => {
     heap.add(4).add(5).add(6).add(3);
-    expect(heap.getData()).toEqual([6, 5, 4, 3]);
+    expect(heap.getData()).toEqual([6, 4, 5, 3]);
   });
 
   it('gets the max element each time', () => {

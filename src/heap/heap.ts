@@ -45,13 +45,13 @@ class Heap {
     let rightChild = this.rightChild(index);
     let smallest = index;
     if (
-      this.data[leftChild] &&
+      leftChild < this.data.length &&
       this.compFunc(this.data[leftChild], this.data[index])
     ) {
       smallest = leftChild;
     }
     if (
-      this.data[rightChild] &&
+      rightChild < this.data.length &&
       this.compFunc(this.data[rightChild], this.data[smallest])
     ) {
       smallest = rightChild;
@@ -75,7 +75,7 @@ class Heap {
   }
 
   private parent(index: number): number {
-    return Math.floor(index / 2);
+    return Math.floor((index - 1) / 2);
   }
 
   private leftChild(index: number): number {
